@@ -1,0 +1,24 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:                                                      
+    def preorderTraversal(self, root: TreeNode) -> List[int]: #O(n) tiempo
+        Tree = []
+        stack = [root]                                        #ROOT tiene propiedades left, Right y Val
+        if not root:
+            return []
+        while stack:                                          #El último valor del stack es siempre añadido a 
+            node = stack.pop()                                # Tree []
+            Tree.append(node.val)                   
+            if node.right:                                    #Esto causa que right siempre sea el ultimo en ser 
+                stack.append(node.right)                      # añadido
+            if node.left:
+                stack.append(node.left)            
+        return Tree
+         
+        
+        
