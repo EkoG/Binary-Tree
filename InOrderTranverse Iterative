@@ -1,0 +1,25 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        if not root:
+            return
+        tree = []
+        stack = []
+        while True:
+            if root:
+                stack.append(root)
+                root = root.left                    
+            elif stack:                        #si se ha llegado hasta el último nodo izquierdo, root será null y entrará aquí, 
+                root = stack.pop()             # imprimirá el primer izq y luego regresará como null si no hay más derechos 
+                tree.append(root.val)          # e imprimira root porque nuevamente root es null
+                root = root.right
+            else:
+                break
+        return tree
+         
