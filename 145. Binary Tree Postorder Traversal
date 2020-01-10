@@ -1,0 +1,24 @@
+#Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+#ES IMPORTANTE COMO SE ACCEDE A LOS NODOS! ME SIRVIÓ DECIR QUE ES UN TRIANGULO QUE LO HACES GIRAR POR NODO, CADA QUE ENCUENTAS UNO
+#IZQ O DERECHA, SE VUELVE LA NUEVA CABEZA (NODE OR ROOT) DEL TRIANGULO, HASTA QUE NO ENCUENTRAS NADA.
+class Solution: 
+    
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        if not root:
+            return
+        tree = []
+        stack = [root]
+        while stack:
+            root = stack.pop()
+            if root:
+                tree.insert(0, root.val)
+            if root and root.left:
+                stack.append(root.left)
+            if root and root.right:
+                stack.append(root.right)
+        return tree
