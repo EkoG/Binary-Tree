@@ -1,0 +1,18 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:                      #Se necesita una función que te ayude a revisar si ambos nodos son SIMETRICOS, NO IGUALES
+        return (self.mirror(root,root))
+    def mirror(self, treeNode1: TreeNode, treeNode2: TreeNode) -> bool:
+        if not treeNode1 and not treeNode2:                             #Como el Nodo tienes 3 propiedades: Val, right, left: si un nodo es null, Saldrá un error, porque 
+            return True                                                 #Null, NO TIENE PROPIEDAD Val, así que se evalua desde aquí, si ambos nodos son null, significa que son simetricos
+        elif not treeNode1 or not treeNode2:
+            return False  
+        return (treeNode1.val == treeNode2.val) and self.mirror(treeNode1.right, treeNode2.left) 
+        and self.mirror(treeNode1.left, treeNode2.right)                #Para que funcioné la recursividad se necesita que los parametros de mirror sean de acuerdo a la simetría
+                                                                        # Right 1 = Left 2; Left 1 = Right 2
