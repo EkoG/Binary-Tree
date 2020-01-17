@@ -1,0 +1,22 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        def limits(lowerLimit, upperLimit):
+            if lowerLimit > upperLimit:
+                return None
+            root = TreeNode(preorder[self.index_pre])
+            index_in = inIndexMap[root.val]
+            self.index_pre += 1
+            root.left = limits(lowerLimit, index_in - 1)                            #Nuevamente el limite izq, es poco intuitivo; cuidado
+            root.right = limits(index_in + 1, upperLimit)                           #el arbol se construye de IZQ a derecha 
+            return root        
+        self.index_pre = 0
+        inIndexMap = {val: i for i, val in enumerate(inorder)}
+        return limits(0,  len(inorder)-1)  
+        
