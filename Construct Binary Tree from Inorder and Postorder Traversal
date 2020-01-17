@@ -1,0 +1,15 @@
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
+        def limits(lowerLimit, upperLimit):                      #Los limites evitan que te salgas de cada lista
+            if lowerLimit > upperLimit:
+                return None                                     # Si se sale de rango, se llena el espacio con Null
+            root = TreeNode(postorder[self.index_post])
+            index_in = inIndexMap[root.val]
+            self.index_post -= 1
+            root.right = limits(index_in + 1, upperLimit)
+            root.left = limits(lowerLimit, index_in - 1)       # El (-1) es muy importante, ya que evita que la lista salga fuera de rango
+            return root                                         # Es poco intuitivo 
+            
+        self.index_post = len(postorder) - 1
+        inIndexMap = {val: i for i, val in enumerate(inorder)}
+        return limits(0,  self.index_post)  
